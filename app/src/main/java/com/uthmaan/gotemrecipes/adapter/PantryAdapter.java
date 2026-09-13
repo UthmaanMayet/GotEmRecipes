@@ -12,7 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
+    public interface OnPantryItemClickListener {
+        void OnPantryItemClick(PantryItem pantryItem);
+    }
+    private OnPantryItemClickListener pantryItemClickListener;
     private List<PantryItem> pantryItems = new ArrayList<>();
+
+    public PantryAdapter(OnPantryItemClickListener pantryItemClickListener) {
+        this.pantryItemClickListener = pantryItemClickListener;
+    }
     @NonNull
     @Override
     public PantryViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType) {
@@ -32,11 +40,16 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         holder.ingredientQuantityText.setText(quantityDisplay);
         holder.ingredientCategoryText.setText(currentPantryItem.getIngredientCategory());
         holder.ingredientExpiryText.setText(currentPantryItem.getExpiryDate());
+        holder.itemView.setOnClickListener(view ->
+                pantryItemClickListener.OnPantryItemClick(currentPantryItem)
+        );
     }
     @Override
     public int getItemCount() {
         return pantryItems.size();
     }
+
+
     // This is to update the recycler viewer whenever the fresh pantry data ends up being loaded
 
     public void setPantryItems(List<PantryItem> updatedPantryItems) {

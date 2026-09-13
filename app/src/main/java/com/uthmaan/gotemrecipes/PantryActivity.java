@@ -36,7 +36,36 @@ public class PantryActivity extends AppCompatActivity{
         });
         // this will be here to display the pantry items in the list
         pantryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        pantryAdapter = new PantryAdapter();
+        pantryAdapter = new PantryAdapter(pantryItem -> {
+            // this is here ti open and add and edit the screen with the selected pantry
+            Intent editIngredientScreen =
+                    new Intent(PantryActivity.this,AddEditIngredientActivity.class);
+            editIngredientScreen.putExtra(
+                    "PANTRY_ITEM_ID",
+                    pantryItem.getPantryItemId()
+            );
+            editIngredientScreen.putExtra(
+                    "INGREDIENT_NAME",
+                    pantryItem.getIngredientName()
+            );
+            editIngredientScreen.putExtra(
+                    "PANTRY_QUANTITY",
+                    pantryItem.getPantryQuantity()
+            );
+            editIngredientScreen.putExtra(
+                    "MEASUREMENT_UNIT",
+                    pantryItem.getMeasurementUnit()
+            );
+            editIngredientScreen.putExtra(
+                    "INGREDIENT_CATEGORY",
+                    pantryItem.getIngredientCategory()
+            );
+            editIngredientScreen.putExtra(
+                    "EXPIRY_DATE",
+                    pantryItem.getExpiryDate()
+            );
+            startActivity(editIngredientScreen);
+        });
         pantryRecyclerView.setAdapter(pantryAdapter);
         // This will allow access to the rooms databases
         appDatabase = AppDatabase.getDatabase(this);
@@ -58,7 +87,13 @@ public class PantryActivity extends AppCompatActivity{
                     appDatabase.pantryDao().getAllPantryItems();
             runOnUiThread(() -> {
                 pantryAdapter.setPantryItems(pantryItems);
-                String pantrySummary = pantryItems.size() + "items";
+                int itemCount = pantryItems.size();
+                String pantrySummary;
+                if (itemCount ==1) {
+                    pantrySummary = "1 item" ;
+                } else {
+                    pantrySummary = itemCount + "items";
+                }
                 pantrySummaryText.setText(pantrySummary);
             });
         }).start();
