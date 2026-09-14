@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.uthmaan.gotemrecipes.data.RecipeSeeder;
 import com.uthmaan.gotemrecipes.adapter.PantryAdapter;
 import com.uthmaan.gotemrecipes.database.AppDatabase;
 import com.uthmaan.gotemrecipes.model.PantryItem;
@@ -69,6 +69,7 @@ public class PantryActivity extends AppCompatActivity{
         pantryRecyclerView.setAdapter(pantryAdapter);
         // This will allow access to the rooms databases
         appDatabase = AppDatabase.getDatabase(this);
+        new Thread(() -> RecipeSeeder.seedRecipes(appDatabase)).start();
         loadPantryItems();
     }
 
