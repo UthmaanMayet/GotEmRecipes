@@ -1,0 +1,80 @@
+package com.uthmaan.gotemrecipes;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.uthmaan.gotemrecipes.adapter.RecipeAdapter;
+import com.uthmaan.gotemrecipes.database.AppDatabase;
+import com.uthmaan.gotemrecipes.model.PantryItem;
+import com.uthmaan.gotemrecipes.model.Recipe;
+import com.uthmaan.gotemrecipes.model.RecipeIngredient;
+import com.uthmaan.gotemrecipes.utils.RecipeMatcher;
+import java.util.ArrayList;
+import java.util.List;
+public class SuggestedRecipesActivity extends AppCompatActivity {
+    private RecyclerView suggestedRecipesRecyclerView;
+    private  TextView emptyRecipesText;
+    private RecipeAdapter recipeAdapter;
+    private AppDatabase appDatabase;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_suggested_recipes);
+        suggestedRecipesRecyclerView =
+                findViewById(R.id.recyclerSuggestedRecipes);
+        emptyRecipesText =
+                findViewById(R.id.textNoRecipes);
+        suggestedRecipesRecyclerView.setLayoutManager(
+                new LinearLayoutManager(this)
+        );
+        recipeAdapter = new RecipeAdapter(new ArrayList<>());
+        suggestedRecipesRecyclerView.setAdapter(recipeAdapter);
+        appDatabase = AppDatabase.getDatabase(this);
+        loadSuggestedRecipes();
+    }
+    private void loadSuggestedRecipes() {
+        new Thread(() -> {
+            List<PantryItem> pantryItems =
+                    appDatabase.pantryDao().getAllPantryItems();
+            List<Recipe> recipes =
+                    appDatabase.recipeDao().getAllRecipes();
+            runOnUiThread(() ->
+            Toast.makeText(
+                    SuggestedRecipesActivity.this,
+                    "Recipes in database:" + recipes.size(),
+                    Toast.LENGTH_LONG
+            ).show()
+            );
+            List<RecipeIngredient> allRecipeIngredients =
+                    new ArrayList<>();
+            for (Recipe recipe : recipes) {
+                List<RecipeIngredient> recipeIngredients =
+                        appDatabase.recipeIngredientDao()
+                                .getIngredientsForRecipe(
+                                        recipe.getRecipeId()
+                                );
+                allRecipeIngredients.addAll(recipeIngredients);
+            }
+            List<Recipe> matchingRecipes =
+                    RecipeMatcher.findMatchingRecipes(
+                            recipes,
+                            pantryItems,
+                            allRecipeIngredients
+                    );
+            runOnUiThread(() -> {
+                recipeAdapter.setRecipes(matchingRecipes);
+                if (matchingRecipes.isEmpty()) {
+                    emptyRecipesText.setVisibility(View.VISIBLE);
+                    suggestedRecipesRecyclerView.setVisibility(View.GONE);
+                }else {
+                    emptyRecipesText.setVisibility(View.GONE);
+                    suggestedRecipesRecyclerView.setVisibility(View.VISIBLE);
+                }
+            });
+        }).start();
+    }
+}
