@@ -1,4 +1,5 @@
 package com.uthmaan.gotemrecipes;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +32,21 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         suggestedRecipesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
         );
-        recipeAdapter = new RecipeAdapter(new ArrayList<>());
+        recipeAdapter = new RecipeAdapter(
+                new ArrayList<>(),
+                recipe -> {
+                    Intent recipeDetailIntent =
+                            new Intent(
+                                    SuggestedRecipesActivity.this,
+                                    RecipeDetailActivity.class
+                            );
+                    recipeDetailIntent.putExtra(
+                            "RECIPE_ID" ,
+                            recipe.getRecipeId()
+                    );
+                    startActivity(recipeDetailIntent);
+                }
+        );
         suggestedRecipesRecyclerView.setAdapter(recipeAdapter);
         appDatabase = AppDatabase.getDatabase(this);
         loadSuggestedRecipes();
