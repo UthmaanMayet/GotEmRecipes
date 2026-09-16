@@ -32,7 +32,8 @@ public class RecipeDetailActivity extends AppCompatActivity{
                 findViewById(R.id.textRecipeIngredients);
         recipeInstructionsText =
                 findViewById(R.id.textRecipeInstructions);
-
+        backButton =
+                findViewById(R.id.buttonBack);
         backButton.setOnClickListener(view ->finish());
         appDatabase =AppDatabase.getDatabase(this);
         recipeId =

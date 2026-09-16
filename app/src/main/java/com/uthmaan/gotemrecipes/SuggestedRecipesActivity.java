@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +21,8 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
     private  TextView emptyRecipesText;
     private RecipeAdapter recipeAdapter;
     private AppDatabase appDatabase;
+    private Button backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                 findViewById(R.id.recyclerSuggestedRecipes);
         emptyRecipesText =
                 findViewById(R.id.textNoRecipes);
+        backButton = findViewById(R.id.buttonSuggestedBack);
         suggestedRecipesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
         );
@@ -48,6 +51,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                 }
         );
         suggestedRecipesRecyclerView.setAdapter(recipeAdapter);
+        backButton.setOnClickListener(view -> finish());
         appDatabase = AppDatabase.getDatabase(this);
         loadSuggestedRecipes();
     }
