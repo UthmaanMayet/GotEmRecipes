@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".PantryActivity">
+    tools:context=".PantryActivity"
+    android:background="@color/gotem_black">
     
     <TextView
         android:id="@+id/textPantryTitle"
@@ -14,9 +15,10 @@
         android:layout_height="wrap_content"
         android:text="WHAT'VE YOU GOT?"
         android:textSize="26sp"
+        android:layout_marginTop="12dp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/gotem_white"
+        app:layout_constraintTop_toBottomOf="@id/buttonPantryHome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <TextView
@@ -25,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="Your Pantry"
         android:textSize="16sp"
-        android:textColor="#666666"
+        android:textColor="@color/gotem_light_grey"
         android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@+id/textPantryTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +42,8 @@
         android:textStyle="bold"
         android:padding="16dp"
         android:layout_marginTop="20dp"
-        android:background="#EEEEEE"
+        android:background="@drawable/home_card_background"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toBottomOf="@+id/textPantrySubtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -63,6 +66,8 @@
         android:text="+ ADD INGREDIENT"
         android:textStyle="bold"
         android:layout_marginTop="12dp"
+        android:backgroundTint="@color/gotem_red"
+        android:textColor="@color/gotem_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonViewRecipes" />
@@ -72,7 +77,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="VIEW SUGGESTED RECIPES"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gotem_red"
+        android:textColor="@color/gotem_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -82,10 +89,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="SETTINGS"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gotem_blue"
+        android:textColor="@color/gotem_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonAddIngredient" />
+
+    <Button
+        android:id="@+id/buttonPantryHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        android:backgroundTint="@color/gotem_blue"
+        android:textColor="@color/gotem_white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

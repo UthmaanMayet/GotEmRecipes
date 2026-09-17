@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:padding="16dp"
-    android:background="#EEEEEE">
+    android:background="@drawable/home_card_background">
 
     <TextView
         android:id="@+id/textIngredientName"
@@ -16,7 +16,7 @@
         android:text="Chicken Breast"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/gotem_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="500 g"
         android:textSize="15sp"
-        android:textColor="#555555"
+        android:textColor="@color/gotem_light_grey"
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textIngredientName" />
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Meat"
         android:textSize="14sp"
-        android:textColor="#666666"
+        android:textColor="@color/gotem_light_grey"
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textIngredientQuantity" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:text="Expires :14 Sep 2026"
         android:textSize="14sp"
-        android:textColor="#666666"
+        android:textColor="@color/gotem_light_grey"
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textIngredientCategory"

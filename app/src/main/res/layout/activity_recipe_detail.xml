@@ -5,13 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp" >
+    android:padding="20dp"
+    android:background="@color/gotem_black">
 
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text ="BACK"
+        android:backgroundTint="@color/gotem_blue"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
@@ -22,6 +25,7 @@
         android:text="Recipe Name"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toBottomOf="@+id/buttonBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -32,7 +36,8 @@
         android:layout_marginTop="6dp"
         android:text="Recipe Category"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textRecipeDetailName"
+        android:textColor="@color/gotem_light_grey"
+        app:layout_constraintTop_toBottomOf="@id/textRecipeDetailName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -43,7 +48,8 @@
         android:layout_marginTop="14dp"
         android:text="Recipe description"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textRecipeDetailCategory"
+        android:textColor="@color/gotem_light_grey"
+        app:layout_constraintTop_toBottomOf="@id/textRecipeDetailCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     
@@ -55,7 +61,8 @@
         android:text="INGREDIENTS"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textRecipeDetailDescription"
+        android:textColor="@color/gotem_white"
+        app:layout_constraintTop_toBottomOf="@id/textRecipeDetailDescription"
         app:layout_constraintEnd_toEndOf="parent" />
     
     <TextView
@@ -65,7 +72,10 @@
         android:layout_marginTop="8dp"
         android:text="Ingredients will appear over here"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textIngredientsHeading"
+        android:textColor="@color/gotem_light_grey"
+        android:background="@drawable/home_card_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textIngredientsHeading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -77,7 +87,8 @@
         android:text="INSTRUCTIONS"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textRecipeIngredients"
+        android:textColor="@color/gotem_white"
+        app:layout_constraintTop_toBottomOf="@id/textRecipeIngredients"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
@@ -87,7 +98,10 @@
         android:layout_marginTop="8dp"
         android:text="Cooking instructions will appear over here"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/textInstructionsHeading"
+        android:textColor="@color/gotem_light_grey"
+        android:background="@drawable/home_card_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textInstructionsHeading"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

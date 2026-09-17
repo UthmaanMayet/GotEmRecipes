@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gotem_black">#111111</color>
+    <color name="gotem_charcoal">#1A1A1A</color>
+    <color name="gotem_card">#242424</color>
+    <color name="gotem_red">#E53935</color>
+    <color name="gotem_red_dark">#B71C1C</color>
+    <color name="gotem_blue">#2979FF</color>
+    <color name="gotem_blue_dark" >#0D47A1</color>
+    <color name="gotem_white">#F7F7F7</color>
+    <color name="gotem_light_grey">#C7C7C7</color>
+    <color name="gotem_mid_grey">#7A7A7A</color>
+
 </resources>

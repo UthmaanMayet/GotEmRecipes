@@ -21,6 +21,7 @@ public class PantryActivity extends AppCompatActivity{
     private AppDatabase appDatabase;
     private Button viewRecipesButton;
     private Button settingsButton;
+    private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class PantryActivity extends AppCompatActivity{
         addIngredientButton = findViewById(R.id.buttonAddIngredient);
         viewRecipesButton = findViewById(R.id.buttonViewRecipes);
         settingsButton = findViewById(R.id.buttonSettings);
+        homeButton = findViewById(R.id.buttonPantryHome);
         // This is here to open the form where the user can then add a new ingredient to pantry
         settingsButton = findViewById(R.id.buttonSettings);
         settingsButton.setOnClickListener(view ->{
@@ -56,6 +58,7 @@ public class PantryActivity extends AppCompatActivity{
                     new Intent(PantryActivity.this, AddEditIngredientActivity.class);
             startActivity(openAddIngredientScreen);
         });
+        homeButton.setOnClickListener(view -> finish());
         // this will be here to display the pantry items in the list
         pantryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         pantryAdapter = new PantryAdapter(pantryItem -> {

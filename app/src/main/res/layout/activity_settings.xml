@@ -4,15 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@color/gotem_black">
 
     <Button
         android:id="@+id/buttonSettingsBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BACK"
+        android:backgroundTint="@color/gotem_blue"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/textSettingsTitle"
         android:layout_width="wrap_content"
@@ -21,6 +25,7 @@
         android:text="SETTINGS"
         android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toBottomOf="@+id/buttonSettingsBack"
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
@@ -30,6 +35,7 @@
         android:layout_marginTop="4dp"
         android:text="Make GOT 'EM RECIPES yours"
         android:textSize="16sp"
+        android:textColor="@color/gotem_light_grey"
         app:layout_constraintTop_toBottomOf="@+id/textSettingsTitle"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -41,6 +47,7 @@
         android:text="Show expiry reminders"
         android:textSize="16sp"
         android:checked="true"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toBottomOf="@+id/textSettingsSubtitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -53,6 +60,7 @@
         android:text="Show recipe suggestions"
         android:textSize = "16sp"
         android:checked ="true"
+        android:textColor="@color/gotem_white"
         app:layout_constraintTop_toBottomOf="@+id/switchExpiryWarnings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

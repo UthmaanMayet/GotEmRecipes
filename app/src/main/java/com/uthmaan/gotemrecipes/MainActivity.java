@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button recipesButton;
     private Button settingsButton;
     private AppDatabase appDatabase;
+    private Button allRecipesButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +33,20 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.buttonHomePantry);
         recipesButton =
                 findViewById(R.id.buttonHomeRecipes);
+        allRecipesButton =
+                findViewById(R.id.buttonHomeAllRecipes);
         settingsButton =
                 findViewById(R.id.buttonHomeSettings);
         appDatabase =
                 AppDatabase.getDatabase(this);
+
+        allRecipesButton.setOnClickListener(view -> {
+            Intent allRecipesIntent =
+                    new Intent(MainActivity.this,
+                            AllRecipesActivity.class
+                    );
+            startActivity(allRecipesIntent);
+        });
 
         pantryButton.setOnClickListener(view -> {
             Intent pantryIntent =
@@ -103,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         );
                     } else {
                         pantryCountText.setText(
-                                pantryCount + "pantry items"
+                                pantryCount + " pantry items"
                         );
                     }
                     if (matchingRecipes.isEmpty()) {

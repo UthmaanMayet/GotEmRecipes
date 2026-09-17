@@ -90,11 +90,11 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         };
         ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.item_spinner,
                 measurementUnits
         );
         unitAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
+                R.layout.item_spinner
         );
         measurementUnitSpinner.setAdapter(unitAdapter);
     }
@@ -102,7 +102,7 @@ public class AddEditIngredientActivity extends AppCompatActivity {
     private void setupIngredientCategories() {
         String[] ingredientCategories = {
                 "Meat",
-                "Diary",
+                "Dairy",
                 "Vegetables",
                 "Fruit",
                 "Grain and Pasta",
@@ -114,11 +114,11 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         };
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                R.layout.item_spinner,
                 ingredientCategories
         );
         categoryAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
+                R.layout.item_spinner
         );
         ingredientCategorySpinner.setAdapter(categoryAdapter);
     }
