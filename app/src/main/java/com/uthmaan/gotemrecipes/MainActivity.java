@@ -6,6 +6,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.uthmaan.gotemrecipes.database.AppDatabase;
+import com.uthmaan.gotemrecipes.model.PantryItem;
+import com.uthmaan.gotemrecipes.model.Recipe;
+import com.uthmaan.gotemrecipes.model.RecipeIngredient;
+import com.uthmaan.gotemrecipes.utils.RecipeMatcher;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView pantryCountText;
@@ -66,27 +72,49 @@ public class MainActivity extends AppCompatActivity {
         }
         private void loadHomeData() {
             new Thread(() -> {
-                int pantryCount =
+                List<PantryItem> pantryItems =
                         appDatabase.pantryDao()
-                                .getAllPantryItems()
-                                .size();
-                runOnUiThread(() -> {
-                    if (pantryCount == 1) {
-                        pantryCountText.setText(
-                                "1 Pantry item"
+                                .getAllPantryItems();
+                int pantryCount =
+                        pantryItems.size();
+                List<Recipe> recipes =
+                        appDatabase.recipeDao()
+                                .getAllRecipes();
+                List<RecipeIngredient> allRecipeIngredients =
+                        new ArrayList<>();
+                for (Recipe recipe :recipes) {
+                    List<RecipeIngredient> recipeIngredients =
+                            appDatabase.recipeIngredientDao()
+                                    .getIngredientsForRecipe(
+                                            recipe.getRecipeId()
+                                    );
+                    allRecipeIngredients.addAll(recipeIngredients);
+                }
+                List<Recipe> matchingRecipes =
+                        RecipeMatcher.findMatchingRecipes(
+                                recipes,
+                                pantryItems,
+                                allRecipeIngredients
                         );
-                    }else {
+                runOnUiThread(() -> {
+                    if (pantryCount ==1) {
+                        pantryCountText.setText(
+                                "1 pantry item"
+                        );
+                    } else {
                         pantryCountText.setText(
                                 pantryCount + "pantry items"
                         );
                     }
-                    if (pantryCount == 0 ) {
+                    if (matchingRecipes.isEmpty()) {
                         homeSuggestionText.setText(
-                                "Add pantry ingredients to unlock recipe suggestions"
+                                "Add a few more ingredients to unlock other recipes"
                         );
                     } else {
+                        Recipe suggestedRecipe =
+                                matchingRecipes.get(0);
                         homeSuggestionText.setText(
-                                "Your pantry is ready, see what you can amek "
+                                suggestedRecipe.getRecipeName()
                         );
                     }
                 });
