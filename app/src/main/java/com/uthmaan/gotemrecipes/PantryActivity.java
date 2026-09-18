@@ -1,6 +1,7 @@
 package com.uthmaan.gotemrecipes;
 
 import android.os.Bundle;
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.uthmaan.gotemrecipes.database.AppDatabase;
 import com.uthmaan.gotemrecipes.model.PantryItem;
 import java.util.List;
 import android.content.Intent;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PantryActivity extends AppCompatActivity{
     private TextView pantrySummaryText;
@@ -22,6 +24,7 @@ public class PantryActivity extends AppCompatActivity{
     private Button viewRecipesButton;
     private Button settingsButton;
     private Button homeButton;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,24 @@ public class PantryActivity extends AppCompatActivity{
         viewRecipesButton = findViewById(R.id.buttonViewRecipes);
         settingsButton = findViewById(R.id.buttonSettings);
         homeButton = findViewById(R.id.buttonPantryHome);
+        bottomNavigationView =findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.navPantry);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if(itemId == R.id.navHome) {
+                startActivity(new Intent(PantryActivity.this, MainActivity.class));
+                return true;
+            } else if (itemId == R.id.navPantry) {
+                return true;
+            } else if (itemId ==R.id.navRecipes) {
+                startActivity(new Intent(PantryActivity.this, AllRecipesActivity.class));
+                return true;
+            } else if (itemId == R.id.navSettings) {
+                startActivity(new Intent(PantryActivity.this, SettingsActivity.class));
+                return true;
+            }
+            return false;
+        });
         // This is here to open the form where the user can then add a new ingredient to pantry
         settingsButton = findViewById(R.id.buttonSettings);
         settingsButton.setOnClickListener(view ->{
