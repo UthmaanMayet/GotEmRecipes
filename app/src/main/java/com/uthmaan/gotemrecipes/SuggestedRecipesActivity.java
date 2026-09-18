@@ -3,7 +3,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,13 +60,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                     appDatabase.pantryDao().getAllPantryItems();
             List<Recipe> recipes =
                     appDatabase.recipeDao().getAllRecipes();
-            runOnUiThread(() ->
-            Toast.makeText(
-                    SuggestedRecipesActivity.this,
-                    "Recipes in database:" + recipes.size(),
-                    Toast.LENGTH_LONG
-            ).show()
-            );
+
             List<RecipeIngredient> allRecipeIngredients =
                     new ArrayList<>();
             for (Recipe recipe : recipes) {

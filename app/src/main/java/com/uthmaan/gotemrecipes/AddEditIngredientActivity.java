@@ -25,6 +25,7 @@ public class AddEditIngredientActivity extends AppCompatActivity {
     private Button saveIngredientButton;
     private Button deleteIngredientButton;
     private AppDatabase appDatabase;
+    private Button cancelIngredientButton;
     private int pantryItemId = -1;
     private boolean editingExistingItem = false;
 
@@ -40,6 +41,8 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         ingredientCategorySpinner = findViewById(R.id.spinnerIngredientCategory);
         saveIngredientButton = findViewById(R.id.buttonSaveIngredient);
         deleteIngredientButton= findViewById(R.id.buttonDeleteIngredient);
+        cancelIngredientButton = findViewById(R.id.buttonCancelIngredient);
+        cancelIngredientButton.setOnClickListener(view ->finish());
         appDatabase = AppDatabase.getDatabase(this);
         setupMeasurementUnits();
         setupIngredientCategories();

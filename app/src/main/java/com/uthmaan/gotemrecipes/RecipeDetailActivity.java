@@ -2,7 +2,6 @@ package com.uthmaan.gotemrecipes;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.uthmaan.gotemrecipes.database.AppDatabase;
 import com.uthmaan.gotemrecipes.model.Recipe;
@@ -44,11 +43,6 @@ public class RecipeDetailActivity extends AppCompatActivity{
                 if (recipeId != -1) {
                     loadRecipeDetails();
                 }
-                Toast.makeText(
-                        this,
-                        "Recipe ID : "+ recipeId,
-                        Toast.LENGTH_LONG
-                ).show();
     }
     private void loadRecipeDetails() {
         new Thread(() -> {
