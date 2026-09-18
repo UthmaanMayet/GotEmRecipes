@@ -10,13 +10,19 @@ import com.uthmaan.gotemrecipes.R;
 import com.uthmaan.gotemrecipes.model.PantryItem;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
     public interface OnPantryItemClickListener {
         void OnPantryItemClick(PantryItem pantryItem);
     }
     private OnPantryItemClickListener pantryItemClickListener;
     private List<PantryItem> pantryItems = new ArrayList<>();
+
 
     public PantryAdapter(OnPantryItemClickListener pantryItemClickListener) {
         this.pantryItemClickListener = pantryItemClickListener;
@@ -28,7 +34,9 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         View pantryItemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_pantry,parent, false);
         return new PantryViewHolder(pantryItemView);
+
     }
+
     @Override
     public void onBindViewHolder(@NonNull PantryViewHolder holder, int position){
         PantryItem currentPantryItem = pantryItems.get(position);
@@ -40,6 +48,39 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         holder.ingredientQuantityText.setText(quantityDisplay);
         holder.ingredientCategoryText.setText(currentPantryItem.getIngredientCategory());
         holder.ingredientExpiryText.setText(currentPantryItem.getExpiryDate());
+        Context context = holder.itemView.getContext();
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences("got_em_settings", Context.MODE_PRIVATE);
+        boolean showExpiryWarnings =
+                sharedPreferences.getBoolean("expiry_warnings" , true);
+        holder.expiryWarningText.setVisibility(View.VISIBLE);
+        if (showExpiryWarnings) {
+            String expiryDateText = currentPantryItem.getExpiryDate();
+            if (expiryDateText != null
+                    && !expiryDateText.trim().isEmpty()
+                    && !expiryDateText.equalsIgnoreCase("No Expiry date")
+                    && !expiryDateText.equalsIgnoreCase("N/A")) {
+                try {
+                    SimpleDateFormat dateFormat =
+                            new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
+                    Date expiryDate = dateFormat.parse(expiryDateText);
+                    Date currentDate = new Date();
+                    if(expiryDate != null) {
+                        long differenceInMilliseconds =
+                                expiryDate.getTime() - currentDate.getTime();
+                        long daysRemaining =
+                                TimeUnit.MILLISECONDS.toDays(differenceInMilliseconds);
+                        if (daysRemaining <0 ) {
+                            holder.expiryWarningText.setText("EXPIRED");
+                            holder.expiryWarningText.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } catch (Exception ignored){
+                }
+            } else {
+                holder.expiryWarningText.setVisibility(View.GONE);
+            }
+        }
         holder.itemView.setOnClickListener(view ->
                 pantryItemClickListener.OnPantryItemClick(currentPantryItem)
         );
@@ -61,6 +102,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         private final TextView ingredientQuantityText;
         private final TextView ingredientCategoryText;
         private final TextView ingredientExpiryText;
+        private final TextView expiryWarningText;
 
         public PantryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +110,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
             ingredientQuantityText = itemView.findViewById(R.id.textIngredientQuantity);
             ingredientCategoryText = itemView.findViewById(R.id.textIngredientCategory);
             ingredientExpiryText = itemView.findViewById(R.id.textIngredientExpiry);
+            expiryWarningText = itemView.findViewById(R.id.textExpiryWarning);
         }
 
     }

@@ -51,5 +51,19 @@
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textIngredientCategory"
+         />
+    <TextView
+        android:id="@+id/textExpiryWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXPIRING SOON"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/gotem_red"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textIngredientExpiry"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
