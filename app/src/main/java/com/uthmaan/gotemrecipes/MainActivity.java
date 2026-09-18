@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.uthmaan.gotemrecipes.database.AppDatabase;
 import com.uthmaan.gotemrecipes.model.PantryItem;
 import com.uthmaan.gotemrecipes.model.Recipe;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.uthmaan.gotemrecipes.model.RecipeIngredient;
 import com.uthmaan.gotemrecipes.utils.RecipeMatcher;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     private AppDatabase appDatabase;
     private Button allRecipesButton;
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,27 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.buttonHomeAllRecipes);
         settingsButton =
                 findViewById(R.id.buttonHomeSettings);
+        bottomNavigationView = findViewById(R.id.bottmNavigation);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.navHome) {
+                return true;
+            } else if (itemId == R.id.navPantry) {
+                Intent pantryIntent = new Intent(MainActivity.this, PantryActivity.class);
+                startActivity(pantryIntent);
+                return true;
+            } else if (itemId == R.id.navRecipes) {
+                Intent recipesIntent = new Intent(MainActivity.this, AllRecipesActivity.class);
+                startActivity(recipesIntent);
+                return true;
+            } else if (itemId == R.id.navSettings) {
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            }
+            return false;
+        });
         appDatabase =
                 AppDatabase.getDatabase(this);
 
