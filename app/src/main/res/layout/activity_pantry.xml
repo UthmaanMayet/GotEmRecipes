@@ -59,6 +59,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@android:layout/simple_list_item_2" />
+
+    <Button
+        android:id="@+id/buttonSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SETTINGS"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gotem_blue"
+        android:textColor="@color/gotem_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAddIngredient" />
+
     <Button
         android:id="@+id/buttonAddIngredient"
         android:layout_width="0dp"
@@ -68,7 +81,6 @@
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/gotem_red"
         android:textColor="@color/gotem_white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonViewRecipes" />
 
@@ -82,19 +94,7 @@
         android:textColor="@color/gotem_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="SETTINGS"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/gotem_blue"
-        android:textColor="@color/gotem_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddIngredient" />
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation" />
 
     <Button
         android:id="@+id/buttonPantryHome"
