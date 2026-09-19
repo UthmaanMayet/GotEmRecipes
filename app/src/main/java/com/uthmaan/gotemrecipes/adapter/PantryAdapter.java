@@ -64,7 +64,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
                     SimpleDateFormat dateFormat =
                             new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
                     Date expiryDate = dateFormat.parse(expiryDateText);
-                    Date currentDate = new Date();
+                    String todayText = dateFormat.format(new Date());
+                    Date currentDate = dateFormat.parse(todayText);
                     if(expiryDate != null) {
                         long differenceInMilliseconds =
                                 expiryDate.getTime() - currentDate.getTime();
@@ -72,6 +73,9 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
                                 TimeUnit.MILLISECONDS.toDays(differenceInMilliseconds);
                         if (daysRemaining <0 ) {
                             holder.expiryWarningText.setText("EXPIRED");
+                            holder.expiryWarningText.setVisibility(View.VISIBLE);
+                        } else if (daysRemaining <= 3) {
+                            holder.expiryWarningText.setText("EXPIRING SOON");
                             holder.expiryWarningText.setVisibility(View.VISIBLE);
                         }
                     }
